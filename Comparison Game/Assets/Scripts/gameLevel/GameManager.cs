@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     private GameObject topRectangleImage, bottomRectangleImage;
 
     [SerializeField]
+    private GameObject pausePanel;
+
+    [SerializeField]
     private Text topRectangleText, bottomRectangleText;
 
     [SerializeField]
@@ -24,6 +27,8 @@ public class GameManager : MonoBehaviour
     TimerManager timerManager;
 
     CirclesManager circlesManager;
+
+    TrueFalseManager trueFalseManager;
 
     int gameCount, whichGame, topValue, bottomValue, bigValue;
 
@@ -35,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         timerManager = Object.FindObjectOfType<TimerManager>();
         circlesManager = Object.FindObjectOfType<CirclesManager>();
+        trueFalseManager = Object.FindObjectOfType<TrueFalseManager>();
 
 
     }
@@ -98,6 +104,10 @@ public class GameManager : MonoBehaviour
         {
             whichGame = 5;
         }
+        else
+        {
+            whichGame = Random.Range(1, 6);
+        }
         switch (whichGame)
         {
             case 1:
@@ -120,7 +130,7 @@ public class GameManager : MonoBehaviour
     void FirstFunction()
     {
 
-        int randomValue = Random.Range(0, 50);
+        int randomValue = Random.Range(1, 50);
         if (randomValue <= 25)
         {
             topValue = Random.Range(2, 50);
@@ -137,9 +147,14 @@ public class GameManager : MonoBehaviour
         {
             bigValue = topValue;
         }
-        else
+        else if (bottomValue > topValue)
         {
             bigValue = bottomValue;
+        }
+        else if (topValue == bottomValue)
+        {
+            FirstFunction();
+            return;
         }
 
         topRectangleText.text = topValue.ToString();
@@ -241,12 +256,16 @@ public class GameManager : MonoBehaviour
         bottomValue = Random.Range(2, 10);
         int dividend2 = bottomValue * divisor2;
 
-        if(topValue>bottomValue){
-            bigValue=topValue;
-        }else if(bottomValue>topValue){
+        if (topValue > bottomValue)
+        {
+            bigValue = topValue;
+        }
+        else if (bottomValue > topValue)
+        {
             bigValue = bottomValue;
         }
-        else if(topValue == bottomValue){
+        else if (topValue == bottomValue)
+        {
             FifthFunction();
             return;
         }
@@ -256,6 +275,8 @@ public class GameManager : MonoBehaviour
 
 
     }
+
+
     public void setButtonValue(string buttonName)
     {
         if (buttonName == "topButton")
@@ -269,17 +290,37 @@ public class GameManager : MonoBehaviour
 
         if (bigValue == buttonValue)
         {
+            trueFalseManager.openTrueFalseScale(true);
             circlesManager.turnOnCirclesScale(gameCount % 5);
             gameCount++;
             WhichGame();
         }
         else
         {
+            trueFalseManager.openTrueFalseScale(false);
+            decreaseCounterByError();
+            WhichGame();
             Debug.Log("Wrong!!!");
 
         }
 
     }
 
+    void decreaseCounterByError()
+    {
+        gameCount -= (gameCount % 5 + 5);
+        if (gameCount < 0)
+        {
+            gameCount = 0;
+        }
+
+        circlesManager.turnOffCirclesScale();
+
+    }
+    public void openPausePanel()
+    {
+        pausePanel.SetActive(true);
+
+    }
 
 }

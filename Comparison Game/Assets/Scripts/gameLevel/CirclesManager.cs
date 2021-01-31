@@ -12,7 +12,7 @@ public class CirclesManager : MonoBehaviour
         turnOffCirclesScale();
     }
 
-    void turnOffCirclesScale()
+    public void turnOffCirclesScale()
     {
         foreach (GameObject circle in circlesArray)
         {
