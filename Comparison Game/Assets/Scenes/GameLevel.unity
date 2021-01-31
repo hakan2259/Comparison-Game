@@ -3283,6 +3283,7 @@ MonoBehaviour:
   correctSound: {fileID: 8300000, guid: c4ca7bd23701ced45acf59ed85a1f81c, type: 3}
   wrongSound: {fileID: 8300000, guid: 8c263d819ecfa564791487d6a980689a, type: 3}
   endingSound: {fileID: 8300000, guid: 3e9940cb9e6768a4882e11b71c27ded9, type: 3}
+  countDownSound: {fileID: 8300000, guid: 8512222eac7959444a3081c8d4cac815, type: 3}
 --- !u!4 &1554660879
 Transform:
   m_ObjectHideFlags: 0
