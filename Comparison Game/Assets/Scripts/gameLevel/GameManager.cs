@@ -82,10 +82,38 @@ public class GameManager : MonoBehaviour
         {
             whichGame = 1;
         }
+        else if (gameCount >= 5 && gameCount < 10)
+        {
+            whichGame = 2;
+        }
+        else if (gameCount >= 10 && gameCount < 15)
+        {
+            whichGame = 3;
+        }
+        else if (gameCount >= 15 && gameCount < 20)
+        {
+            whichGame = 4;
+        }
+        else if (gameCount >= 20 && gameCount < 25)
+        {
+            whichGame = 5;
+        }
         switch (whichGame)
         {
             case 1:
                 FirstFunction();
+                break;
+            case 2:
+                SecondFunction();
+                break;
+            case 3:
+                ThirdFunction();
+                break;
+            case 4:
+                FourthFunction();
+                break;
+            case 5:
+                FifthFunction();
                 break;
         }
     }
@@ -119,6 +147,115 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void SecondFunction()
+    {
+        int number1 = Random.Range(1, 10);
+        int number2 = Random.Range(1, 20);
+        int number3 = Random.Range(1, 10);
+        int number4 = Random.Range(1, 20);
+
+        topValue = number1 + number2;
+        bottomValue = number3 + number4;
+
+        if (topValue > bottomValue)
+        {
+            bigValue = topValue;
+        }
+        else if (bottomValue > topValue)
+        {
+            bigValue = bottomValue;
+        }
+        else if (topValue == bottomValue)
+        {
+            SecondFunction();
+            return;
+        }
+        topRectangleText.text = number1 + " + " + number2;
+        bottomRectangleText.text = number3 + " + " + number4;
+
+    }
+
+
+    void ThirdFunction()
+    {
+        int number1 = Random.Range(11, 33);
+        int number2 = Random.Range(1, 11);
+        int number3 = Random.Range(11, 33);
+        int number4 = Random.Range(1, 11);
+
+        topValue = number1 - number2;
+        bottomValue = number3 - number4;
+
+        if (topValue > bottomValue)
+        {
+            bigValue = topValue;
+        }
+        else if (bottomValue > topValue)
+        {
+            bigValue = bottomValue;
+        }
+        else if (topValue == bottomValue)
+        {
+            ThirdFunction();
+            return;
+        }
+        topRectangleText.text = number1 + " - " + number2;
+        bottomRectangleText.text = number3 + " - " + number4;
+    }
+
+    void FourthFunction()
+    {
+        int number1 = Random.Range(1, 11);
+        int number2 = Random.Range(1, 11);
+        int number3 = Random.Range(1, 11);
+        int number4 = Random.Range(1, 11);
+
+        topValue = number1 * number2;
+        bottomValue = number3 * number4;
+
+        if (topValue > bottomValue)
+        {
+            bigValue = topValue;
+        }
+        else if (bottomValue > topValue)
+        {
+            bigValue = bottomValue;
+        }
+        else if (topValue == bottomValue)
+        {
+            FourthFunction();
+            return;
+        }
+        topRectangleText.text = number1 + " X " + number2;
+        bottomRectangleText.text = number3 + " X " + number4;
+    }
+
+    void FifthFunction()
+    {
+
+        int divisor1 = Random.Range(2, 10);
+        topValue = Random.Range(2, 10);
+        int dividend1 = divisor1 * topValue;
+
+        int divisor2 = Random.Range(2, 10);
+        bottomValue = Random.Range(2, 10);
+        int dividend2 = bottomValue * divisor2;
+
+        if(topValue>bottomValue){
+            bigValue=topValue;
+        }else if(bottomValue>topValue){
+            bigValue = bottomValue;
+        }
+        else if(topValue == bottomValue){
+            FifthFunction();
+            return;
+        }
+        topRectangleText.text = dividend1 + " / " + divisor1;
+        bottomRectangleText.text = dividend2 + " / " + divisor2;
+
+
+
+    }
     public void setButtonValue(string buttonName)
     {
         if (buttonName == "topButton")
