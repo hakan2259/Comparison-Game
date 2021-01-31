@@ -38,7 +38,14 @@ public class GameManager : MonoBehaviour
 
     int totalScore, scoreIncrease;
 
-    int correctNumber,wrongNumber;
+    int correctNumber, wrongNumber;
+
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip startingSound, correctSound, wrongSound, endingSound;
+
+
 
 
 
@@ -49,6 +56,8 @@ public class GameManager : MonoBehaviour
         timerManager = Object.FindObjectOfType<TimerManager>();
         circlesManager = Object.FindObjectOfType<CirclesManager>();
         trueFalseManager = Object.FindObjectOfType<TrueFalseManager>();
+        audioSource = GetComponent<AudioSource>();
+
 
 
     }
@@ -56,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         totalScore = 0;
         scoreText.text = "0";
 
@@ -83,6 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        audioSource.PlayOneShot(startingSound);
         timerManager.StartTime();
         WhichGame();
         collectScoreImageText.GetComponent<CanvasGroup>().DOFade(0, 0.2f);
@@ -314,6 +325,7 @@ public class GameManager : MonoBehaviour
             totalScore += scoreIncrease;
             scoreText.text = totalScore.ToString();
             correctNumber++;
+            audioSource.PlayOneShot(correctSound);
             WhichGame();
         }
         else
@@ -321,6 +333,7 @@ public class GameManager : MonoBehaviour
             trueFalseManager.openTrueFalseScale(false);
             decreaseCounterByError();
             wrongNumber++;
+            audioSource.PlayOneShot(wrongSound);
             WhichGame();
             Debug.Log("Wrong!!!");
 
@@ -347,10 +360,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        audioSource.PlayOneShot(endingSound);
         resultPanel.SetActive(true);
         resultManager = Object.FindObjectOfType<ResultManager>();
-        resultManager.ShowResults(correctNumber,wrongNumber,totalScore);
-        
+        resultManager.ShowResults(correctNumber, wrongNumber, totalScore);
+
     }
 
 }
