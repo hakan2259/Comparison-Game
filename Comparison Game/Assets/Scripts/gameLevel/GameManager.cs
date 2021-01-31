@@ -106,9 +106,12 @@ public class GameManager : MonoBehaviour
 
 
     }
-    void playCountDownSound()
+    public void playCountDownSound()
     {
         audioSource.PlayOneShot(countDownSound);
+    }
+    public void stopCountDownSound(){
+        audioSource.Stop();
     }
     void WhichGame()
     {

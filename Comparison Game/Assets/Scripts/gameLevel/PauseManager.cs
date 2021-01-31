@@ -7,9 +7,17 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject pausePanel;
+
+    GameManager gameManager;
+
+    
     private void OnEnable()
     {
+        gameManager = Object.FindObjectOfType<GameManager>();
         Time.timeScale = 0f;
+        gameManager.stopCountDownSound();
+        
+
 
     }
     private void OnDisable()
@@ -20,6 +28,7 @@ public class PauseManager : MonoBehaviour
     public void StartAgain()
     {
         pausePanel.SetActive(false);
+        gameManager.playCountDownSound();
 
     }
 
