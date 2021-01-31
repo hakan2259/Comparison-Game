@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     private GameObject topRectangleImage, bottomRectangleImage;
 
     [SerializeField]
-    private GameObject pausePanel;
+    private GameObject pausePanel, resultPanel;
 
     [SerializeField]
-    private Text topRectangleText, bottomRectangleText;
+    private Text topRectangleText, bottomRectangleText, scoreText;
 
     [SerializeField]
     private GameObject darkGreenCircles, lightGreenCircles;
@@ -30,9 +30,17 @@ public class GameManager : MonoBehaviour
 
     TrueFalseManager trueFalseManager;
 
+    ResultManager resultManager;
+
     int gameCount, whichGame, topValue, bottomValue, bigValue;
 
     int buttonValue;
+
+    int totalScore, scoreIncrease;
+
+    int correctNumber,wrongNumber;
+
+
 
 
 
@@ -48,6 +56,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        totalScore = 0;
+        scoreText.text = "0";
+
 
         darkGreenCircles.GetComponent<CanvasGroup>().DOFade(1, 1f);
         lightGreenCircles.GetComponent<CanvasGroup>().DOFade(1, 1f);
@@ -87,26 +98,32 @@ public class GameManager : MonoBehaviour
         if (gameCount < 5)
         {
             whichGame = 1;
+            scoreIncrease = 25;
         }
         else if (gameCount >= 5 && gameCount < 10)
         {
             whichGame = 2;
+            scoreIncrease = 50;
         }
         else if (gameCount >= 10 && gameCount < 15)
         {
             whichGame = 3;
+            scoreIncrease = 75;
         }
         else if (gameCount >= 15 && gameCount < 20)
         {
             whichGame = 4;
+            scoreIncrease = 100;
         }
         else if (gameCount >= 20 && gameCount < 25)
         {
             whichGame = 5;
+            scoreIncrease = 125;
         }
         else
         {
             whichGame = Random.Range(1, 6);
+            scoreIncrease = 150;
         }
         switch (whichGame)
         {
@@ -293,12 +310,17 @@ public class GameManager : MonoBehaviour
             trueFalseManager.openTrueFalseScale(true);
             circlesManager.turnOnCirclesScale(gameCount % 5);
             gameCount++;
+
+            totalScore += scoreIncrease;
+            scoreText.text = totalScore.ToString();
+            correctNumber++;
             WhichGame();
         }
         else
         {
             trueFalseManager.openTrueFalseScale(false);
             decreaseCounterByError();
+            wrongNumber++;
             WhichGame();
             Debug.Log("Wrong!!!");
 
@@ -321,6 +343,14 @@ public class GameManager : MonoBehaviour
     {
         pausePanel.SetActive(true);
 
+    }
+
+    public void GameOver()
+    {
+        resultPanel.SetActive(true);
+        resultManager = Object.FindObjectOfType<ResultManager>();
+        resultManager.ShowResults(correctNumber,wrongNumber,totalScore);
+        
     }
 
 }

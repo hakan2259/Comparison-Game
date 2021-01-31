@@ -11,12 +11,19 @@ public class TimerManager : MonoBehaviour
     [SerializeField]
     private Text timeText;
 
+    GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = Object.FindObjectOfType<GameManager>();
+    }
+
 
     void Start()
     {
-        
 
-        remainingTime = 90;
+
+        remainingTime = 10;
         isCountTheTime = true;
 
 
@@ -46,6 +53,7 @@ public class TimerManager : MonoBehaviour
             {
                 isCountTheTime = false;
                 timeText.text = "";
+                gameManager.GameOver();
 
             }
             remainingTime--;
