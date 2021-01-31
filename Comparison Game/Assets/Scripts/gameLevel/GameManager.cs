@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
 
     [SerializeField]
-    private AudioClip startingSound, correctSound, wrongSound, endingSound;
+    private AudioClip startingSound, correctSound, wrongSound, endingSound, countDownSound;
 
 
 
@@ -98,10 +98,17 @@ public class GameManager : MonoBehaviour
         WhichGame();
         collectScoreImageText.GetComponent<CanvasGroup>().DOFade(0, 0.2f);
         chooseTheBigNumberText.GetComponent<CanvasGroup>().DOFade(1, 0.2f);
+        Invoke("playCountDownSound",1f);
 
 
 
 
+
+
+    }
+    void playCountDownSound()
+    {
+        audioSource.PlayOneShot(countDownSound);
     }
     void WhichGame()
     {

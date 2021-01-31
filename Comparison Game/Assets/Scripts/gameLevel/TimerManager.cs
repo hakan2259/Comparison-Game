@@ -23,7 +23,7 @@ public class TimerManager : MonoBehaviour
     {
 
 
-        remainingTime = 10;
+        remainingTime = 90;
         isCountTheTime = true;
 
 
