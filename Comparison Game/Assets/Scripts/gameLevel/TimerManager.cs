@@ -1,0 +1,56 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+public class TimerManager : MonoBehaviour
+{
+    private int remainingTime;
+    bool isCountTheTime;
+
+
+    [SerializeField]
+    private Text timeText;
+
+
+    void Start()
+    {
+        
+
+        remainingTime = 90;
+        isCountTheTime = true;
+
+
+
+
+    }
+    public void StartTime()
+    {
+        StartCoroutine(TimerRoutine());
+    }
+
+    IEnumerator TimerRoutine()
+    {
+        while (isCountTheTime)
+        {
+
+            yield return new WaitForSeconds(1f);
+            if (remainingTime < 10)
+            {
+                timeText.text = "0" + remainingTime.ToString();
+            }
+            else
+            {
+                timeText.text = remainingTime.ToString();
+            }
+            if (remainingTime <= 0)
+            {
+                isCountTheTime = false;
+                timeText.text = "";
+
+            }
+            remainingTime--;
+
+        }
+
+    }
+}

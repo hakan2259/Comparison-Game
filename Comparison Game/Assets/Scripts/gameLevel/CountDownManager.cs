@@ -32,20 +32,20 @@ public class CountDownManager : MonoBehaviour
         countDownText.text = "3";
         yield return new WaitForSeconds(0.5f);
         countDownImage.transform.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         countDownImage.transform.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack);
         yield return new WaitForSeconds(0.5f);
 
         countDownText.text = "2";
         yield return new WaitForSeconds(0.5f);
         countDownImage.transform.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         countDownImage.transform.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack);
         yield return new WaitForSeconds(0.5f);
         countDownText.text = "1";
         yield return new WaitForSeconds(0.5f);
         countDownImage.transform.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         countDownImage.transform.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack);
         yield return new WaitForSeconds(0.5f);
 
