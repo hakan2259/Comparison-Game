@@ -12,14 +12,23 @@ public class CirclesManager : MonoBehaviour
         turnOffCirclesScale();
     }
 
-    void turnOffCirclesScale(){
-      foreach(GameObject circle in circlesArray){
-          circle.transform.GetComponent<RectTransform>().localScale=Vector2.zero;
-      }
+    void turnOffCirclesScale()
+    {
+        foreach (GameObject circle in circlesArray)
+        {
+            circle.transform.GetComponent<RectTransform>().localScale = Vector2.zero;
+        }
     }
 
-    public void turnOnCirclesScale(int whichCircle){
-        circlesArray[whichCircle].transform.GetComponent<RectTransform>().DOScale(1,0.5f);
+    public void turnOnCirclesScale(int whichCircle)
+    {
+        circlesArray[whichCircle].transform.GetComponent<RectTransform>().DOScale(1, 0.5f);
+
+        if (whichCircle % 5 == 0)
+        {
+            turnOffCirclesScale();
+
+        }
 
     }
-} 
+}

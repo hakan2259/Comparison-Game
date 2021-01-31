@@ -129,13 +129,15 @@ public class GameManager : MonoBehaviour
         {
             buttonValue = bottomValue;
         }
-        
-        if(bigValue == buttonValue){
-            circlesManager.turnOnCirclesScale(gameCount%5);
-            gameCount++;
-            Debug.Log(gameCount%5);
 
-        }else{
+        if (bigValue == buttonValue)
+        {
+            circlesManager.turnOnCirclesScale(gameCount % 5);
+            gameCount++;
+            WhichGame();
+        }
+        else
+        {
             Debug.Log("Wrong!!!");
 
         }
